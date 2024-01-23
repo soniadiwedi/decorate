@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Layout from "./../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import "../styles/Homepage.css";
+import Carousel from "../components/Carosal/Carousel";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -19,11 +20,16 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-
+  
+  const images = [
+    'https://d1wc69nzx5ojwh.cloudfront.net/mageplaza/bannerslider/banner/image/t/o/top_banner_14-12-23.jpg',
+    'https://d1wc69nzx5ojwh.cloudfront.net/mageplaza/bannerslider/banner/image/n/e/newyeartopbanner2024.jpg',
+    'https://d1wc69nzx5ojwh.cloudfront.net/mageplaza/bannerslider/banner/image/i/m/img_2569.jpeg',
+  ];
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/category/get-category");
+      const { data } = await axios.get("https://spotless-cape-fawn.cyclic.app/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -40,7 +46,7 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`http://localhost:8080/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(`https://spotless-cape-fawn.cyclic.app/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -52,7 +58,7 @@ const HomePage = () => {
   //getTOtal COunt
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/product/product-count");
+      const { data } = await axios.get("https://spotless-cape-fawn.cyclic.app/api/v1/product/product-count");
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -67,7 +73,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`http://localhost:8080/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(`https://spotless-cape-fawn.cyclic.app/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
@@ -97,7 +103,7 @@ const HomePage = () => {
   //get filterd product
   const filterProduct = async () => {
     try {
-      const { data } = await axios.post("http://localhost:8080/api/v1/product/product-filters", {
+      const { data } = await axios.post("https://spotless-cape-fawn.cyclic.app/api/v1/product/product-filters", {
         checked,
         radio,
       });
@@ -109,12 +115,7 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      <img
-        src="/images/banner.png"
-        className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
-      />
+    <Carousel images={images}/>
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">

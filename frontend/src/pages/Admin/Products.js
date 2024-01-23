@@ -10,7 +10,7 @@ const Products = () => {
   //getall products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/product/get-product");
+      const { data } = await axios.get("https://spotless-cape-fawn.cyclic.app/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);
