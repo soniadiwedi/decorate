@@ -112,6 +112,8 @@ const HomePage = () => {
       console.log(error);
     }
   };
+
+  console.log("p",products);
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
