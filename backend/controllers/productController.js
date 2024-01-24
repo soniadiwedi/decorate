@@ -1,7 +1,8 @@
 const fs =require('fs')
 const slugify =require("slugify")
 require("dotenv").config()
-const {productModel} =require("../models/productModel")
+const {productModel} =require("../models/productModel");
+const categoryModel = require('../models/categoryModel');
 const createProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity, shipping } =
